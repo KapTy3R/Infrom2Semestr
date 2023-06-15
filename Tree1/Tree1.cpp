@@ -3,10 +3,10 @@ using namespace std;
 
 struct Node {
 	int value;
-	Node* left; //потомоки
-	Node* right; 
+	Node* left; // потомоки
+	Node* right;
 
-	Node(int val) : value(val), left(nullptr), right(nullptr) {} //Конструктор, который устанавливает значение узла при его создании
+	Node(int val) : value(val), left(nullptr), right(nullptr) {} // Конструктор, который устанавливает значение узла при его создании
 };
 
 // Функция для вставки элемента в дерево
@@ -53,6 +53,10 @@ Node* preOrderTraversal(Node* root, int x) {
 		return nullptr;
 	}
 
+	// Рекурсивно вызываем обход для левого и правого поддерева
+	root->left = preOrderTraversal(root->left, x);
+	root->right = preOrderTraversal(root->right, x);
+
 	// Выполняем операции над значением узла
 	if (root->value % x == 0) {
 		// Удаляем узел, кратный X
@@ -61,12 +65,6 @@ Node* preOrderTraversal(Node* root, int x) {
 		delete root;
 		return merge(left, right);
 	}
-
-	cout << root->value << " ";
-
-	// Рекурсивно вызываем обход для левого и правого поддерева
-	root->left = preOrderTraversal(root->left, x);
-	root->right = preOrderTraversal(root->right, x);
 
 	return root;
 }
@@ -103,7 +101,7 @@ int main() {
 
 	cout << "\nEnter X:";
 	int x;
-	cin>>x; // Заданное число X
+	cin >> x; // Заданное число X
 
 	// Прямой обход дерева и удаление элементов, кратных X
 	root = preOrderTraversal(root, x);

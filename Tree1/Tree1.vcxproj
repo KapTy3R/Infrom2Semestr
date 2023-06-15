@@ -153,6 +153,10 @@
   <ItemGroup>
     <ClCompile Include="Tree1.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="TreeAfter.JPG" />
+    <Image Include="TreeBefore.JPG" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
