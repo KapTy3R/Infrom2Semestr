@@ -115,7 +115,7 @@ int main() {
 		list.addElement(num);
 	}
 
-	cout << "List before removing extra elements: ";
+	cout << "Start elements: ";
 	list.display();
 
 	list.removeExtraElements();
