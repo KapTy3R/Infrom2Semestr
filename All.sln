@@ -25,6 +25,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tree2", "Tree2\Tree2.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DinStruct1", "DinStruct1\DinStruct1.vcxproj", "{71E9A39A-F0CB-4B84-9B57-DE4177DF597A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DinStruct3", "DinStruct3\DinStruct3.vcxproj", "{EB405927-88FC-489C-9170-561AA3D0397F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -121,6 +123,14 @@ Global
 		{71E9A39A-F0CB-4B84-9B57-DE4177DF597A}.Release|x64.Build.0 = Release|x64
 		{71E9A39A-F0CB-4B84-9B57-DE4177DF597A}.Release|x86.ActiveCfg = Release|Win32
 		{71E9A39A-F0CB-4B84-9B57-DE4177DF597A}.Release|x86.Build.0 = Release|Win32
+		{EB405927-88FC-489C-9170-561AA3D0397F}.Debug|x64.ActiveCfg = Debug|x64
+		{EB405927-88FC-489C-9170-561AA3D0397F}.Debug|x64.Build.0 = Debug|x64
+		{EB405927-88FC-489C-9170-561AA3D0397F}.Debug|x86.ActiveCfg = Debug|Win32
+		{EB405927-88FC-489C-9170-561AA3D0397F}.Debug|x86.Build.0 = Debug|Win32
+		{EB405927-88FC-489C-9170-561AA3D0397F}.Release|x64.ActiveCfg = Release|x64
+		{EB405927-88FC-489C-9170-561AA3D0397F}.Release|x64.Build.0 = Release|x64
+		{EB405927-88FC-489C-9170-561AA3D0397F}.Release|x86.ActiveCfg = Release|Win32
+		{EB405927-88FC-489C-9170-561AA3D0397F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
