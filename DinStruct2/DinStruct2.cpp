@@ -1,115 +1,164 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <cstring>
+#include <cctype>
 
-struct Node {
-	char* data;
-	Node* next;
+using namespace std;
 
-	Node(const char* value) : next(nullptr) {
-		data = new char[strlen(value) + 1];
-		strcpy(data, value);
-	}
-
-	~Node() {
-		delete[] data;
-	}
+// Структура элемента очереди
+struct QueueNode {
+	char word[100];
+	QueueNode* next;
 };
 
-class Queue {
-private:
-	Node* front;
-	Node* rear;
+// Структура очереди
+struct Queue {
+	QueueNode* front;
+	QueueNode* rear;
+};
 
-public:
-	Queue() : front(nullptr), rear(nullptr) {}
+// Инициализация очереди
+void initQueue(Queue& q) {
+	q.front = nullptr;
+	q.rear = nullptr;
+}
 
-	~Queue() {
-		while (!isEmpty()) {
-			dequeue();
-		}
+// Проверка, является ли очередь пустой
+bool isQueueEmpty(Queue& q) {
+	return (q.front == nullptr);
+}
+
+// Вставка элемента в очередь
+void enqueue(Queue & q, const char* word) {
+	QueueNode* newNode = new QueueNode;
+	strcpy(newNode->word, word);
+	newNode->next = nullptr;
+
+	if (isQueueEmpty(q)) {
+		q.front = newNode;
+		q.rear = newNode;
+	}
+	else {
+		q.rear->next = newNode;
+		q.rear = newNode;
+	}
+}
+
+// Удаление элемента из очереди
+void dequeue(Queue & q) {
+	if (isQueueEmpty(q)) {
+		cout << "Queue is empty." << endl;
+		return;
 	}
 
-	void enqueue(const char* value) {
-		Node* newNode = new Node(value);
-		if (isEmpty()) {
-			front = newNode;
-			rear = newNode;
+	QueueNode* temp = q.front;
+	q.front = q.front->next;
+	delete temp;
+}
+
+// Удаление из очереди всех слов, совпадающих с последним словом
+void removeMatchingWords(Queue & q) {
+	if (isQueueEmpty(q)) {
+		cout << "Queue is empty." << endl;
+		return;
+	}
+
+	const char* lastWord = q.rear->word;
+
+	QueueNode* curr = q.front;
+	QueueNode* prev = nullptr;
+
+	while (curr != nullptr) {
+		if (strcmp(curr->word, lastWord) == 0) {
+			if (curr == q.front) {
+				q.front = curr->next;
+			}
+			else {
+				prev->next = curr->next;
+			}
+
+			if (curr == q.rear) {
+				q.rear = prev;
+			}
+
+			QueueNode* temp = curr;
+			curr = curr->next;
+			delete temp;
 		}
 		else {
-			rear->next = newNode;
-			rear = newNode;
+			prev = curr;
+			curr = curr->next;
 		}
 	}
+}
 
-	void dequeue() {
-		if (isEmpty()) {
-			std::cout << "Queue is empty. Cannot dequeue." << std::endl;
-			return;
-		}
+// Преобразование слова к нижнему регистру
+void toLowercase(char* word) {
+	int length = strlen(word);
+	for (int i = 0; i < length; i++) {
+		word[i] = tolower(word[i]);
+	}
+}
 
-		Node* temp = front;
-		front = front->next;
-		if (front == nullptr) {
-			rear = nullptr;
-		}
-		delete temp;
+// Преобразование всех слов в очереди к нижнему регистру
+void convertWordsToLowercase(Queue & q) {
+	if (isQueueEmpty(q)) {
+		cout << "Queue is empty." << endl;
+		return;
 	}
 
-	bool isEmpty() {
-		return (front == nullptr);
+	QueueNode* curr = q.front;
+
+	while (curr != nullptr) {
+		toLowercase(curr->word);
+		curr = curr->next;
+	}
+}
+
+// Вывод содержимого очереди
+void displayQueue(Queue & q) {
+	if (isQueueEmpty(q)) {
+		cout << "Queue is empty." << endl;
+		return;
 	}
 
-	void removeDuplicates() {
-		if (isEmpty() || front == rear) {
-			return;
-		}
+	QueueNode* curr = q.front;
 
-		Node* current = front;
-		while (current != nullptr) {
-			Node* runner = current;
-			while (runner->next != nullptr) {
-				if (strcmp(runner->next->data, current->data) == 0) {
-					Node* duplicate = runner->next;
-					runner->next = runner->next->next;
-					if (runner->next == nullptr) {
-						rear = runner;
-					}
-					delete duplicate;
-				}
-				else {
-					runner = runner->next;
-				}
-			}
-			current = current->next;
-		}
+	while (curr != nullptr) {
+		cout << curr->word << " ";
+		curr = curr->next;
 	}
 
-	void display() {
-		Node* temp = front;
-		while (temp != nullptr) {
-			std::cout << temp->data << " ";
-			temp = temp->next;
-		}
-		std::cout << std::endl;
-	}
-};
+	cout << endl;
+}
 
 int main() {
-	Queue queue;
+	Queue wordQueue;
+	initQueue(wordQueue);
 
-	std::cout << "Enter words (enter an empty word to stop):" << std::endl;
-	char word[100];
-	std::cin.getline(word, sizeof(word));
-	while (strcmp(word, "") != 0) {
-		queue.enqueue(word);
-		std::cin.getline(word, sizeof(word));
+	int numWords;
+	cout << "Enter the number of words: ";
+	cin >> numWords;
+
+	cout << "Enter " << numWords << " words:" << endl;
+	for (int i = 0; i < numWords; i++) {
+		char word[100];
+		cin >> word;
+		enqueue(wordQueue, word);
 	}
 
-	queue.removeDuplicates();
+	cout << "Original queue: ";
+	displayQueue(wordQueue);
 
-	std::cout << "Queue after removing duplicates: ";
-	queue.display();
+	convertWordsToLowercase(wordQueue);
+
+	cout << "Queue after converting words to lowercase: ";
+	displayQueue(wordQueue);
+
+	removeMatchingWords(wordQueue);
+
+	cout << "Queue after removing matching words: ";
+	displayQueue(wordQueue);
 
 	return 0;
 }
