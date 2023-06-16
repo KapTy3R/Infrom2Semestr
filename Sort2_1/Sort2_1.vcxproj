@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{1B377679-4AA3-4343-A210-08A1D967869D}</ProjectGuid>
+    <ProjectGuid>{41693AA7-D224-4E9B-B10A-F6D51D6A43F5}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Sort11</RootNamespace>
+    <RootNamespace>Sort21</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -151,10 +151,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Sort1_1.cpp" />
+    <ClCompile Include="Sort2_1.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="sorted_employees.txt" />
+    <Text Include="SortedText.txt" />
     <Text Include="Text.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

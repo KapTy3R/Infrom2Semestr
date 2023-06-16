@@ -15,12 +15,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sort1_1.cpp">
+    <ClCompile Include="Sort2_1.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Text.txt" />
-    <Text Include="sorted_employees.txt" />
+    <Text Include="SortedText.txt" />
   </ItemGroup>
 </Project>
